@@ -23,8 +23,8 @@ import javax.persistence.spi.PersistenceProvider;
 
 import org.batoo.jpa.BJPASettings;
 import org.batoo.jpa.core.BatooEntityManager;
-import org.batoo.jpa.core.impl.jdbc.PreparedStatementProxy.SqlLoggingType;
-import org.batoo.jpa.core.jdbc.DDLMode;
+import org.batoo.jpa.jdbc.DDLMode;
+import org.batoo.jpa.jdbc.PreparedStatementProxy.SqlLoggingType;
 import org.springframework.orm.jpa.JpaDialect;
 
 /**
