@@ -25,6 +25,10 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
  */
 public abstract class AbstractEntityManagerFactoryIntegrationTests extends AbstractJpaTests {
 
+	public static final String[] BATOOJPA_CONFIG_LOCATIONS = new String[] {
+		"/org/springframework/orm/jpa/batoo/batoo-manager.xml", "/org/springframework/orm/jpa/memdb.xml",
+		"/org/springframework/orm/jpa/inject.xml"};
+
 	public static final String[] TOPLINK_CONFIG_LOCATIONS = new String[] {
 			"/org/springframework/orm/jpa/toplink/toplink-manager.xml", "/org/springframework/orm/jpa/memdb.xml",
 			"/org/springframework/orm/jpa/inject.xml"};
@@ -45,6 +49,9 @@ public abstract class AbstractEntityManagerFactoryIntegrationTests extends Abstr
 	public static Provider getProvider() {
 		String provider = System.getProperty("org.springframework.orm.jpa.provider");
 		if (provider != null) {
+			if (provider.toLowerCase().contains("batoo")) {
+				return Provider.BATOOJPA;
+			}
 			if (provider.toLowerCase().contains("eclipselink")) {
 				return Provider.ECLIPSELINK;
 			}
@@ -68,6 +75,8 @@ public abstract class AbstractEntityManagerFactoryIntegrationTests extends Abstr
 	protected String[] getConfigLocations() {
 		Provider provider = getProvider();
 		switch (provider) {
+			case BATOOJPA:
+				return BATOOJPA_CONFIG_LOCATIONS;
 			case HIBERNATE:
 				return HIBERNATE_CONFIG_LOCATIONS;
 			case TOPLINK:
@@ -89,7 +98,7 @@ public abstract class AbstractEntityManagerFactoryIntegrationTests extends Abstr
 
 
 	public enum Provider {
-		TOPLINK, ECLIPSELINK, HIBERNATE, OPENJPA
+		BATOOJPA, TOPLINK, ECLIPSELINK, HIBERNATE, OPENJPA
 	};
 
 }
