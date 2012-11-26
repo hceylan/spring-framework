@@ -31,6 +31,7 @@ configure(allprojects) {
     repositories {
         maven { url "http://repo.springsource.org/libs-release" }
         maven { url "http://repo.springsource.org/ebr-maven-external" }
+        mavenLocal()
     }
 
     dependencies {
@@ -434,6 +435,7 @@ project('spring-orm') {
         compile("org.hibernate:hibernate-cglib-repack:2.1_3", optional)
         compile("org.hibernate:hibernate-annotations:3.4.0.GA", optional)
         compile("org.hibernate:hibernate-entitymanager:4.1.0.Final", optional)
+        compile("org.batoo.jpa:batoo-jpa:2.0.1.0-SNAPSHOT", optional)
         compile("org.apache.openjpa:openjpa:1.1.0", optional)
         compile("org.eclipse.persistence:org.eclipse.persistence.core:1.0.1", optional)
         compile("org.eclipse.persistence:org.eclipse.persistence.jpa:1.0.1", optional)
